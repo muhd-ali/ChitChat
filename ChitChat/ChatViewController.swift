@@ -10,10 +10,15 @@ import UIKit
 
 class ChatViewController: UIViewController, UITableViewDataSource {
     
+    @IBOutlet weak var messageTextField: UITextView!
+    
     @IBOutlet weak var tableView: UITableView!
+    
     let chatModel = ChatModel()
     
     @IBAction func sendButton(_ sender: UIButton) {
+        chatModel.insertMessage(content: messageTextField.text, author: "home")
+        tableView.reloadData()
     }
 
     override func viewDidLoad() {
@@ -22,18 +27,20 @@ class ChatViewController: UIViewController, UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 0
+        return chatModel.messages.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "message", for: indexPath)
         
-        let message = chatModel.messages[indexPath]
-        
+        let message = chatModel.messages[indexPath.section]
+        if let messageCell = cell as? ChatTableViewCell {
+            messageCell.message = message
+        }
         
         return cell
     }

@@ -21,4 +21,10 @@ class ChatModel {
             ],
         ]
     
+    func insertMessage(content: String, author: String) {
+        messages.append([
+            "content" : content,
+            "author" : author,
+            ])
+    }
 }
