@@ -26,7 +26,7 @@ class ChatViewController: UIViewController, UITableViewDataSource {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.estimatedRowHeight = tableView.rowHeight
-        //tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableViewAutomaticDimension
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

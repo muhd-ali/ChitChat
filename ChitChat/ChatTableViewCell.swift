@@ -21,12 +21,21 @@ class ChatTableViewCell: UITableViewCell {
     
     func updateUI() {
         if message?["author"] == "home" {
-            homeMessageTextField.text = message?["content"]
-            awayMessageTextField.isHidden = true
+            showMessage(inField: homeMessageTextField, andHide: awayMessageTextField)
         } else if message?["author"] == "away" {
-            awayMessageTextField.text = message?["content"]
-            homeMessageTextField.isHidden = true
+            showMessage(inField: awayMessageTextField, andHide: homeMessageTextField)
         }
+    }
+    
+    func showMessage(inField: UITextView, andHide: UITextView) {
+        inField.text = message?["content"]
+        let fixedWidth = inField.frame.size.width
+        inField.translatesAutoresizingMaskIntoConstraints = true
+        inField.sizeToFit()
+        inField.isScrollEnabled = false
+        inField.frame.size.width = fixedWidth
+        
+        andHide.isHidden = true
     }
 
 }
