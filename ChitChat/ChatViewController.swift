@@ -17,6 +17,7 @@ class ChatViewController: UIViewController, UITableViewDataSource {
     let chatModel = ChatModel()
     
     @IBAction func sendButton(_ sender: UIButton) {
+        messageTextField.resignFirstResponder()
         chatModel.insertMessage(content: messageTextField.text, author: "home")
         tableView.reloadData()
     }
@@ -24,6 +25,8 @@ class ChatViewController: UIViewController, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
+        tableView.estimatedRowHeight = tableView.rowHeight
+        //tableView.rowHeight = UITableViewAutomaticDimension
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

@@ -10,7 +10,8 @@ import UIKit
 
 class ChatTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var messageTextField: UITextView!
+    @IBOutlet weak var homeMessageTextField: UITextView!
+    @IBOutlet weak var awayMessageTextField: UITextView!
     
     var message: [String:String]? {
         didSet {
@@ -19,10 +20,12 @@ class ChatTableViewCell: UITableViewCell {
     }
     
     func updateUI() {
-        messageTextField.text = message?["content"]
-        if message?["author"] == "away" {
-            messageTextField.backgroundColor = UIColor.brown
-            messageTextField.frame.origin.x = 10
+        if message?["author"] == "home" {
+            homeMessageTextField.text = message?["content"]
+            awayMessageTextField.isHidden = true
+        } else if message?["author"] == "away" {
+            awayMessageTextField.text = message?["content"]
+            homeMessageTextField.isHidden = true
         }
     }
 
