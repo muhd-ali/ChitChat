@@ -20,9 +20,9 @@ class ChatTableViewCell: UITableViewCell {
     }
     
     func updateUI() {
-        if message?["author"] == "home" {
+        if message?["username"] == "iPhone007" {
             showMessage(inField: homeMessageTextField, andHide: awayMessageTextField)
-        } else if message?["author"] == "away" {
+        } else {
             showMessage(inField: awayMessageTextField, andHide: homeMessageTextField)
         }
     }
@@ -30,10 +30,11 @@ class ChatTableViewCell: UITableViewCell {
     func showMessage(inField: UITextView, andHide: UITextView) {
         inField.text = message?["content"]
         let fixedWidth = inField.frame.size.width
+        let xLoc = inField.frame.origin.x
         inField.translatesAutoresizingMaskIntoConstraints = true
         inField.sizeToFit()
-        inField.isScrollEnabled = false
         inField.frame.size.width = fixedWidth
+        inField.frame.origin.x = xLoc
         
         andHide.isHidden = true
     }

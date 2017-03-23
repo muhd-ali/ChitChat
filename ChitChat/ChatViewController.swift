@@ -14,11 +14,11 @@ class ChatViewController: UIViewController, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
     
-    let chatModel = ChatModel()
+    let chatModel = ChatModel.sharedInstance
     
     @IBAction func sendButton(_ sender: UIButton) {
         messageTextField.resignFirstResponder()
-        chatModel.insertMessage(content: messageTextField.text, author: "home")
+        chatModel.sendMessage(content: messageTextField.text)
         tableView.reloadData()
     }
 

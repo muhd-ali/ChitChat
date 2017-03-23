@@ -7,24 +7,85 @@
 //
 
 import Foundation
+import SocketIO
 
-class ChatModel {
+class ChatModel: NSObject {
+    static let sharedInstance = ChatModel()
+    
+    var socket: SocketIOClient
+    let username = "iPhone007"
+    
+    override init() {
+        socket = SocketIOClient(
+            socketURL: URL(string: "http://192.168.0.105")!,
+            config: [.forceWebsockets(true)]
+        )
+        super.init()
+        setupEvents()
+    }
+    
+    func setupEvents() {
+        setupConnectEvent()
+        setupReceiveEvent()
+        setupDisconnectEvent()
+    }
+    
+    func setupConnectEvent() {
+        socket.on("connect") { (data, ack) in
+            print("socket connected")
+        }
+    }
+
+    func setupDisconnectEvent() {
+        socket.on("disconnect") { (data, ack) in
+            print("socket disconnected")
+        }
+    }
+
+    
+    func setupReceiveEvent() {
+        socket.on("messagePayload") { [weak weakSelf = self] (data, ack) in
+            
+                print("data size = \(data.count)")
+                
+            
+            //weakSelf?.addMessage(content: data["date"], username: data["date"])
+        }
+    }
+    
+    func addMessage(content: String, username: String) {
+        messages.append([
+            "content" : content,
+            "username" : username,
+            "date" : String(describing: NSDate()),
+            ])
+    }
     
     var messages: [[String:String]] = [
         [
             "content" : "Hello!",
-            "author" : "away",
+            "username" : "hacker101",
+            "date" : String(describing: NSDate()),
             ],
         [
             "content" : "Hi",
-            "author" : "home",
+            "username" : "iPhone007",
+            "date" : String(describing: NSDate()),
             ],
         ]
     
-    func insertMessage(content: String, author: String) {
-        messages.append([
-            "content" : content,
-            "author" : author,
-            ])
+    func sendMessage(content: String) {
+//        let messagePayload: [String : Any] = [
+//            "message" : content,
+//            "username" : username,
+//            "date" : NSDate(),
+//            ]
+//        
+//        socket.emitWithAck("canUpdate", "hello").timingOut(after: 0) { [weak weakSelf = self] data in
+//            weakSelf?.socket.emit("messagePayload", messagePayload)
+//            weakSelf?.addMessage(content: content, username: username)
+//        }
+        addMessage(content: content, username: username)
     }
+    
 }
