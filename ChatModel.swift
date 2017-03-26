@@ -12,22 +12,24 @@ import SocketIO
 class ChatModel: NSObject {
     static let sharedInstance = ChatModel()
     
-    var socket: SocketIOClient
+    var socket: SocketIOClient = SocketIOClient(
+        socketURL: URL(string: "http://192.168.0.105")!,
+        config: [.forceWebsockets(true), .log(false)]
+    )
+    
     let username = "iPhone007"
     
     override init() {
-        socket = SocketIOClient(
-            socketURL: URL(string: "http://192.168.0.105")!,
-            config: [.forceWebsockets(true)]
-        )
         super.init()
         setupEvents()
+        socket.connect()
     }
     
     func setupEvents() {
         setupConnectEvent()
         setupReceiveEvent()
         setupDisconnectEvent()
+        setupUserConnectEvent()
     }
     
     func setupConnectEvent() {
@@ -41,10 +43,22 @@ class ChatModel: NSObject {
             print("socket disconnected")
         }
     }
+    
+    func setupUserConnectEvent() {
+        socket.on("userConnectNotification") { (data, ack) in
+            print("a user connected")
+        }
+    }
+
+    func setupUserDisconnectEvent() {
+        socket.on("userDisconnectNotification") { (data, ack) in
+            print("a user disconnected")
+        }
+    }
 
     
     func setupReceiveEvent() {
-        socket.on("messagePayload") { [weak weakSelf = self] (data, ack) in
+        socket.on("messagePayload") { (data, ack) in
             
                 print("data size = \(data.count)")
                 
