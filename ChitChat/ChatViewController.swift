@@ -20,27 +20,32 @@ class ChatViewController: UIViewController, UITableViewDataSource {
         messageTextField.resignFirstResponder()
         chatModel.sendMessage(content: messageTextField.text)
         tableView.reloadData()
+        messageNumber += 1
+        messageTextField.text = "message # \(messageNumber)"
     }
-
+    
+    
+    var messageNumber = 1
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.estimatedRowHeight = tableView.rowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
+        messageTextField.text = "message # \(messageNumber)"
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return chatModel.messages.count
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return chatModel.messages.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "message", for: indexPath)
         
-        let message = chatModel.messages[indexPath.section]
+        let message = chatModel.messages[indexPath.row]
         if let messageCell = cell as? ChatTableViewCell {
             messageCell.message = message
         }

@@ -9,7 +9,7 @@
 import UIKit
 
 class ChatTableViewCell: UITableViewCell {
-
+    
     @IBOutlet weak var homeMessageTextField: UITextView!
     @IBOutlet weak var awayMessageTextField: UITextView!
     
@@ -29,14 +29,17 @@ class ChatTableViewCell: UITableViewCell {
     
     func showMessage(inField: UITextView, andHide: UITextView) {
         inField.text = message?["content"]
-        let fixedWidth = inField.frame.size.width
-        let xLoc = inField.frame.origin.x
-        inField.translatesAutoresizingMaskIntoConstraints = true
-        inField.sizeToFit()
-        inField.frame.size.width = fixedWidth
-        inField.frame.origin.x = xLoc
-        
+        fixSize(textView: inField)
         andHide.isHidden = true
     }
-
+    
+    func fixSize(textView: UITextView) {
+        let fixedWidth = textView.frame.size.width
+        let xLoc = textView.frame.origin.x
+        textView.translatesAutoresizingMaskIntoConstraints = true
+        textView.sizeToFit()
+        textView.frame.size.width = fixedWidth
+        textView.frame.origin.x = xLoc
+    }
+    
 }

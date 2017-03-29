@@ -13,7 +13,7 @@ class ChatModel: NSObject {
     static let sharedInstance = ChatModel()
     
     var socket: SocketIOClient = SocketIOClient(
-        socketURL: URL(string: "http://192.168.0.105")!,
+        socketURL: URL(string: "http://192.168.0.30")!,
         config: [.forceWebsockets(true), .log(false)]
     )
     
@@ -30,6 +30,7 @@ class ChatModel: NSObject {
         setupReceiveEvent()
         setupDisconnectEvent()
         setupUserConnectEvent()
+        setupUserDisconnectEvent()
     }
     
     func setupConnectEvent() {
@@ -58,8 +59,7 @@ class ChatModel: NSObject {
 
     
     func setupReceiveEvent() {
-        socket.on("messagePayload") { (data, ack) in
-            
+        socket.on("messagePayLoad") { (data, ack) in
                 print("data size = \(data.count)")
                 
             
@@ -86,6 +86,213 @@ class ChatModel: NSObject {
             "username" : "iPhone007",
             "date" : String(describing: NSDate()),
             ],
+
+        
+        
+        
+        
+        
+        [
+            "content" : "Hello!",
+            "username" : "hacker101",
+            "date" : String(describing: NSDate()),
+            ],
+        [
+            "content" : "Hi",
+            "username" : "iPhone007",
+            "date" : String(describing: NSDate()),
+            ],
+        [
+            "content" : "Hello!",
+            "username" : "hacker101",
+            "date" : String(describing: NSDate()),
+            ],
+        [
+            "content" : "Hi",
+            "username" : "iPhone007",
+            "date" : String(describing: NSDate()),
+            ],
+        [
+            "content" : "Hello!",
+            "username" : "hacker101",
+            "date" : String(describing: NSDate()),
+            ],
+        [
+            "content" : "Hi",
+            "username" : "iPhone007",
+            "date" : String(describing: NSDate()),
+            ],
+        [
+            "content" : "Hello!",
+            "username" : "hacker101",
+            "date" : String(describing: NSDate()),
+            ],
+        [
+            "content" : "Hi",
+            "username" : "iPhone007",
+            "date" : String(describing: NSDate()),
+            ],
+        [
+            "content" : "Hello!",
+            "username" : "hacker101",
+            "date" : String(describing: NSDate()),
+            ],
+        [
+            "content" : "Hi",
+            "username" : "iPhone007",
+            "date" : String(describing: NSDate()),
+            ],
+        [
+            "content" : "Hello!",
+            "username" : "hacker101",
+            "date" : String(describing: NSDate()),
+            ],
+        [
+            "content" : "Hi",
+            "username" : "iPhone007",
+            "date" : String(describing: NSDate()),
+            ],
+        [
+            "content" : "Hello!",
+            "username" : "hacker101",
+            "date" : String(describing: NSDate()),
+            ],
+        [
+            "content" : "Hi",
+            "username" : "iPhone007",
+            "date" : String(describing: NSDate()),
+            ],
+        [
+            "content" : "Hello!",
+            "username" : "hacker101",
+            "date" : String(describing: NSDate()),
+            ],
+        [
+            "content" : "Hi",
+            "username" : "iPhone007",
+            "date" : String(describing: NSDate()),
+            ],
+        [
+            "content" : "Hello!",
+            "username" : "hacker101",
+            "date" : String(describing: NSDate()),
+            ],
+        [
+            "content" : "Hi",
+            "username" : "iPhone007",
+            "date" : String(describing: NSDate()),
+            ],
+        [
+            "content" : "Hello!",
+            "username" : "hacker101",
+            "date" : String(describing: NSDate()),
+            ],
+        [
+            "content" : "Hi",
+            "username" : "iPhone007",
+            "date" : String(describing: NSDate()),
+            ],
+        [
+            "content" : "Hello!",
+            "username" : "hacker101",
+            "date" : String(describing: NSDate()),
+            ],
+        [
+            "content" : "Hi",
+            "username" : "iPhone007",
+            "date" : String(describing: NSDate()),
+            ],
+        [
+            "content" : "Hello!",
+            "username" : "hacker101",
+            "date" : String(describing: NSDate()),
+            ],
+        [
+            "content" : "Hi",
+            "username" : "iPhone007",
+            "date" : String(describing: NSDate()),
+            ],
+        [
+            "content" : "Hello!",
+            "username" : "hacker101",
+            "date" : String(describing: NSDate()),
+            ],
+        [
+            "content" : "Hi",
+            "username" : "iPhone007",
+            "date" : String(describing: NSDate()),
+            ],
+        [
+            "content" : "Hello!",
+            "username" : "hacker101",
+            "date" : String(describing: NSDate()),
+            ],
+        [
+            "content" : "Hi",
+            "username" : "iPhone007",
+            "date" : String(describing: NSDate()),
+            ],
+        [
+            "content" : "Hello!",
+            "username" : "hacker101",
+            "date" : String(describing: NSDate()),
+            ],
+        [
+            "content" : "Hi",
+            "username" : "iPhone007",
+            "date" : String(describing: NSDate()),
+            ],
+        [
+            "content" : "Hello!",
+            "username" : "hacker101",
+            "date" : String(describing: NSDate()),
+            ],
+        [
+            "content" : "Hi",
+            "username" : "iPhone007",
+            "date" : String(describing: NSDate()),
+            ],
+        [
+            "content" : "Hello!",
+            "username" : "hacker101",
+            "date" : String(describing: NSDate()),
+            ],
+        [
+            "content" : "Hi",
+            "username" : "iPhone007",
+            "date" : String(describing: NSDate()),
+            ],
+        [
+            "content" : "Hello!",
+            "username" : "hacker101",
+            "date" : String(describing: NSDate()),
+            ],
+        [
+            "content" : "Hi",
+            "username" : "iPhone007",
+            "date" : String(describing: NSDate()),
+            ],
+        [
+            "content" : "Hello!",
+            "username" : "hacker101",
+            "date" : String(describing: NSDate()),
+            ],
+        [
+            "content" : "Hi",
+            "username" : "iPhone007",
+            "date" : String(describing: NSDate()),
+            ],
+        [
+            "content" : "Hello!",
+            "username" : "hacker101",
+            "date" : String(describing: NSDate()),
+            ],
+        [
+            "content" : "Hi",
+            "username" : "iPhone007",
+            "date" : String(describing: NSDate()),
+            ],
+        
         ]
     
     func sendMessage(content: String) {
